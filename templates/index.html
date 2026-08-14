@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Todo App</title>
+</head>
+<body>
+    <form method="POST">
+        <input type="text" autocomplete="off" name="newtask" placeholder="Task">
+        <button type="submit">Add</button>
+    </form>
+    {% for task in tasks %}
+        {% if task[2] == 0 %}
+            <form method="POST">
+                <input type="hidden" name="id" value="{{ task[0] }}">
+                <input type="checkbox" name="completed" onchange="this.form.submit()">
+                {{ task[1] }}
+            </form>
+        {% endif %}
+    {% endfor %}
+
+    <h2>Completed</h2>
+
+    {% for task in tasks %}
+        {% if task[2] == 1 %}
+            <form method="POST">
+                <input type="hidden" name="id" value="{{ task[0] }}">
+                <input type="checkbox" name="completed" checked onchange="this.form.submit()">
+                {{ task[1] }}
+            </form>
+        {% endif %}
+    {% endfor %}
+</body>
