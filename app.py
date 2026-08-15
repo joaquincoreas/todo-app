@@ -17,28 +17,38 @@ def init_db():
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        if request.form.get("completed"):
+        if request.form.get("completed") is not None:
             task_id = request.form.get("id")
+
             db = sqlite3.connect("todo.db")
-            db.execute("UPDATE todos SET completed = 1 WHERE id = ?", (task_id,))
+            
+            task = db.execute("SELECT completed FROM todos WHERE id = ?", (task_id,)).fetchone()
+
+            new_status = 0 if task[0] == 1 else 1
+
+            db.execute("UPDATE todos SET completed = ? WHERE id = ?", (new_status, task_id))
+
             db.commit()
             db.close()
+
             return redirect("/")
-        task = request.form.get("newtask")
         
-        if task:
+        else:
+            task = request.form.get("newtask")
+            if not task:
+                return redirect("/")
             db = sqlite3.connect("todo.db")
             db.execute("INSERT INTO todos (title) VALUES (?)", (task,))
             db.commit()
             db.close()
+            return redirect("/")
 
-        return redirect("/")
     else:
         db = sqlite3.connect("todo.db")
         db.row_factory = sqlite3.Row
 
         tasks = db.execute("SELECT * FROM todos").fetchall()
         db.close()
-        
+
         return render_template("index.html", tasks=tasks)
 

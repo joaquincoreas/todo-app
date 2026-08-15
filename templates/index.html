@@ -27,7 +27,8 @@
         {% if task[2] == 1 %}
             <form method="POST">
                 <input type="hidden" name="id" value="{{ task[0] }}">
-                <input type="checkbox" name="completed" checked onchange="this.form.submit()">
+                <input type="hidden" name="completed" value="">
+                <input type="checkbox" name="completed" value="on" checked onchange="this.form.submit()">
                 {{ task[1] }}
             </form>
         {% endif %}
