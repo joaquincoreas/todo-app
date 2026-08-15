@@ -35,6 +35,10 @@ def index():
         return redirect("/")
     else:
         db = sqlite3.connect("todo.db")
-        tasks = db.execute("SELECT * FROM todos")
+        db.row_factory = sqlite3.Row
+
+        tasks = db.execute("SELECT * FROM todos").fetchall()
+        db.close()
+        
         return render_template("index.html", tasks=tasks)
 

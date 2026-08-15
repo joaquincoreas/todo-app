@@ -9,6 +9,8 @@
         <input type="text" autocomplete="off" name="newtask" placeholder="Task">
         <button type="submit">Add</button>
     </form>
+
+    <h2>To Do</h2>
     {% for task in tasks %}
         {% if task[2] == 0 %}
             <form method="POST">
