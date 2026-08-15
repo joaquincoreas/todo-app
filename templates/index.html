@@ -15,8 +15,20 @@
         {% if task[2] == 0 %}
             <form method="POST">
                 <input type="hidden" name="id" value="{{ task[0] }}">
+                <input type="hidden" name="action" value="update">
                 <input type="checkbox" name="completed" onchange="this.form.submit()">
                 {{ task[1] }}
+            </form>
+            <form method="POST">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id" value="{{ task[0] }}">
+                <input type="text" name="title" value="{{ task[1] }}">
+                <button type="submit">Save</button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="{{ task[0] }}">
+                <button type="submit">Delete</button>
             </form>
         {% endif %}
     {% endfor %}
@@ -27,9 +39,20 @@
         {% if task[2] == 1 %}
             <form method="POST">
                 <input type="hidden" name="id" value="{{ task[0] }}">
-                <input type="hidden" name="completed" value="">
+                <input type="hidden" name="action" value="update">
                 <input type="checkbox" name="completed" value="on" checked onchange="this.form.submit()">
                 {{ task[1] }}
+            </form>
+            <form method="POST">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="id" value="{{ task[0] }}">
+                <input type="text" name="title" value="{{ task[1] }}">
+                <button type="submit">Save</button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="action" value="delete">
+                <input type="hidden" name="id" value="{{ task[0] }}">
+                <button type="submit">Delete</button>
             </form>
         {% endif %}
     {% endfor %}

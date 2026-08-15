@@ -17,7 +17,7 @@ def init_db():
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        if request.form.get("completed") is not None:
+        if request.form.get("action") == "update":
             task_id = request.form.get("id")
 
             db = sqlite3.connect("todo.db")
@@ -32,7 +32,26 @@ def index():
             db.close()
 
             return redirect("/")
-        
+        if request.form.get("action") == "delete":
+            task_id = request.form.get("id")
+
+            db = sqlite3.connect("todo.db")
+            db.execute("DELETE FROM todos WHERE id = ?", (task_id,))
+            db.commit()
+            db.close()
+
+            return redirect("/")
+        if request.form.get("action") == "edit":
+            task_id = request.form.get("id")
+            new_title = request.form.get("title")
+            if not new_title:
+                return redirect("/")
+            db = sqlite3.connect("todo.db")
+            db.execute("UPDATE todos SET title = ? WHERE id = ?", (new_title, task_id))
+            db.commit()
+            db.close()
+
+            return redirect("/")
         else:
             task = request.form.get("newtask")
             if not task:
