@@ -1,67 +1,69 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
-    <title>Todo App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <main class="container">
-        <h1>Todo</h1>
-        <form method="POST">
-            <input type="text" autocomplete="off" name="newtask" placeholder="Task">
-            <button type="submit">Add</button>
-        </form>
+  <main class="container">
+    <h1>Todo</h1>
+    <form method="POST">
+      <input type="text" autocomplete="off" name="newtask" placeholder="Task">
+      <button type="submit">Add</button>
+    </form>
 
-        <section>
-        <h2>Tasks</h2>
-            {% for task in tasks %}
-                {% if task[2] == 0 %}
-                    <form method="POST">
-                        <input type="hidden" name="id" value="{{ task[0] }}">
-                        <input type="hidden" name="action" value="update">
-                        <input type="checkbox" name="completed" onchange="this.form.submit()">
-                        {{ task[1] }}
-                    </form>
-                    <form method="POST">
-                        <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="id" value="{{ task[0] }}">
-                        <input type="text" name="title" value="{{ task[1] }}">
-                        <button type="submit">Save</button>
-                    </form>
-                    <form method="POST">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="id" value="{{ task[0] }}">
-                        <button type="submit">Delete</button>
-                    </form>
-                {% endif %}
-            {% endfor %}
-        </section>
+    <section>
+      <h2>Tasks</h2>
+      {% for task in tasks %}
+      {% if task[2] == 0 %}
+      <form method="POST">
+        <input type="hidden" name="id" value="{{ task[0] }}">
+        <input type="hidden" name="action" value="update">
+        <input type="checkbox" name="completed" onchange="this.form.submit()">
+        {{ task[1] }}
+      </form>
+      <form method="POST">
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="id" value="{{ task[0] }}">
+        <input type="text" name="title" value="{{ task[1] }}">
+        <button type="submit">Save</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="id" value="{{ task[0] }}">
+        <button type="submit">Delete</button>
+      </form>
+      {% endif %}
+      {% endfor %}
+    </section>
 
-        <section>
-        <h2>Completed</h2>
-            {% for task in tasks %}
-                {% if task[2] == 1 %}
-                    <form method="POST">
-                        <input type="hidden" name="id" value="{{ task[0] }}">
-                        <input type="hidden" name="action" value="update">
-                        <input type="checkbox" name="completed" value="on" checked onchange="this.form.submit()">
-                        {{ task[1] }}
-                    </form>
-                    <form method="POST">
-                        <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="id" value="{{ task[0] }}">
-                        <input type="text" name="title" value="{{ task[1] }}">
-                        <button type="submit">Save</button>
-                    </form>
-                    <form method="POST">
-                        <input type="hidden" name="action" value="delete">
-                        <input type="hidden" name="id" value="{{ task[0] }}">
-                        <button type="submit">Delete</button>
-                    </form>
-                {% endif %}
-            {% endfor %}
-        </section>
-        
-    </main>
+    <section>
+      <h2>Completed</h2>
+      {% for task in tasks %}
+      {% if task[2] == 1 %}
+      <form method="POST">
+        <input type="hidden" name="id" value="{{ task[0] }}">
+        <input type="hidden" name="action" value="update">
+        <input type="checkbox" name="completed" value="on" checked onchange="this.form.submit()">
+        {{ task[1] }}
+      </form>
+      <form method="POST">
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="id" value="{{ task[0] }}">
+        <input type="text" name="title" value="{{ task[1] }}">
+        <button type="submit">Save</button>
+      </form>
+      <form method="POST">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="id" value="{{ task[0] }}">
+        <button type="submit">Delete</button>
+      </form>
+      {% endif %}
+      {% endfor %}
+    </section>
+
+  </main>
 </body>
