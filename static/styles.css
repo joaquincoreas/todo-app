@@ -7,4 +7,11 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    gap: 10px;
+}
+
+
+.task-options {
+    display: flex;
+    gap: 10px;
 }

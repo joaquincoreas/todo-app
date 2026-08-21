@@ -21,23 +21,28 @@
       {% for task in tasks %}
       {% if task[2] == 0 %}
       <div class="task">
-        <form method="POST">
-          <input type="hidden" name="id" value="{{ task[0] }}">
-          <input type="hidden" name="action" value="update">
-          <input type="checkbox" name="completed" onchange="this.form.submit()">
-          {{ task[1] }}
-        </form>
-        <form method="POST">
-          <input type="hidden" name="action" value="edit">
-          <input type="hidden" name="id" value="{{ task[0] }}">
-          <input type="text" name="title" value="{{ task[1] }}">
-          <button type="submit">Save</button>
-        </form>
-        <form method="POST">
-          <input type="hidden" name="action" value="delete">
-          <input type="hidden" name="id" value="{{ task[0] }}">
-          <button type="submit">Delete</button>
-        </form>
+        <div>
+          <form method="POST">
+            <input type="hidden" name="id" value="{{ task[0] }}">
+            <input type="hidden" name="action" value="update">
+            <input type="checkbox" name="completed" onchange="this.form.submit()">
+            {{ task[1] }}
+          </form>
+        </div>
+
+        <div class="task-options">
+          <form method="POST">
+            <input type="hidden" name="action" value="edit">
+            <input type="hidden" name="id" value="{{ task[0] }}">
+            <input type="text" name="title" value="{{ task[1] }}">
+            <button type="submit">Save</button>
+          </form>
+          <form method="POST">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="id" value="{{ task[0] }}">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
       </div>
       {% endif %}
       {% endfor %}
@@ -48,23 +53,28 @@
       {% for task in tasks %}
       {% if task[2] == 1 %}
       <div class="task">
-        <form method="POST">
-          <input type="hidden" name="id" value="{{ task[0] }}">
-          <input type="hidden" name="action" value="update">
-          <input type="checkbox" name="completed" value="on" checked onchange="this.form.submit()">
-          {{ task[1] }}
-        </form>
-        <form method="POST">
-          <input type="hidden" name="action" value="edit">
-          <input type="hidden" name="id" value="{{ task[0] }}">
-          <input type="text" name="title" value="{{ task[1] }}">
-          <button type="submit">Save</button>
-        </form>
-        <form method="POST">
-          <input type="hidden" name="action" value="delete">
-          <input type="hidden" name="id" value="{{ task[0] }}">
-          <button type="submit">Delete</button>
-        </form>
+        <div>
+          <form method="POST">
+            <input type="hidden" name="id" value="{{ task[0] }}">
+            <input type="hidden" name="action" value="update">
+            <input type="checkbox" name="completed" value="on" checked onchange="this.form.submit()">
+            {{ task[1] }}
+          </form>
+        </div>
+
+        <div class="task-options">
+          <form method="POST">
+            <input type="hidden" name="action" value="edit">
+            <input type="hidden" name="id" value="{{ task[0] }}">
+            <input type="text" name="title" value="{{ task[1] }}">
+            <button type="submit">Save</button>
+          </form>
+          <form method="POST">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="id" value="{{ task[0] }}">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
       </div>
       {% endif %}
       {% endfor %}
