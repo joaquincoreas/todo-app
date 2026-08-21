@@ -3,6 +3,17 @@ body {
 }
 
 
+.add-button {
+    background-color: #4244cc;
+    color: white;
+    border: none;
+    min-height: 25px;
+    min-width: 40px;
+    height: auto;
+    width: auto;
+    cursor: pointer;
+}
+
 .task {
     display: flex;
     align-items: center;
